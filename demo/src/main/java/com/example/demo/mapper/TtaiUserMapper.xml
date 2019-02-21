@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.demo.dao.TtaiUserMapper">
+  <resultMap id="BaseResultMap" type="com.example.demo.model.TtaiUser">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="user_account" jdbcType="VARCHAR" property="userAccount" />
+    <result column="user_pwd" jdbcType="VARCHAR" property="userPwd" />
+    <result column="user_nickname" jdbcType="VARCHAR" property="userNickname" />
+    <result column="user_email" jdbcType="VARCHAR" property="userEmail" />
+    <result column="del_sign" jdbcType="INTEGER" property="delSign" />
+    <result column="create_tx_stamp" jdbcType="TIMESTAMP" property="createTxStamp" />
+    <result column="lastup_tx_stamp" jdbcType="TIMESTAMP" property="lastupTxStamp" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, user_account, user_pwd, user_nickname, user_email, del_sign, create_tx_stamp, 
+    lastup_tx_stamp
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from ttai_user
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from ttai_user
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.example.demo.model.TtaiUser">
+    insert into ttai_user (id, user_account, user_pwd, 
+      user_nickname, user_email, del_sign, 
+      create_tx_stamp, lastup_tx_stamp)
+    values (#{id,jdbcType=BIGINT}, #{userAccount,jdbcType=VARCHAR}, #{userPwd,jdbcType=VARCHAR}, 
+      #{userNickname,jdbcType=VARCHAR}, #{userEmail,jdbcType=VARCHAR}, #{delSign,jdbcType=INTEGER}, 
+      #{createTxStamp,jdbcType=TIMESTAMP}, #{lastupTxStamp,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.example.demo.model.TtaiUser">
+    insert into ttai_user
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="userAccount != null">
+        user_account,
+      </if>
+      <if test="userPwd != null">
+        user_pwd,
+      </if>
+      <if test="userNickname != null">
+        user_nickname,
+      </if>
+      <if test="userEmail != null">
+        user_email,
+      </if>
+      <if test="delSign != null">
+        del_sign,
+      </if>
+      <if test="createTxStamp != null">
+        create_tx_stamp,
+      </if>
+      <if test="lastupTxStamp != null">
+        lastup_tx_stamp,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="userAccount != null">
+        #{userAccount,jdbcType=VARCHAR},
+      </if>
+      <if test="userPwd != null">
+        #{userPwd,jdbcType=VARCHAR},
+      </if>
+      <if test="userNickname != null">
+        #{userNickname,jdbcType=VARCHAR},
+      </if>
+      <if test="userEmail != null">
+        #{userEmail,jdbcType=VARCHAR},
+      </if>
+      <if test="delSign != null">
+        #{delSign,jdbcType=INTEGER},
+      </if>
+      <if test="createTxStamp != null">
+        #{createTxStamp,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lastupTxStamp != null">
+        #{lastupTxStamp,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.example.demo.model.TtaiUser">
+    update ttai_user
+    <set>
+      <if test="userAccount != null">
+        user_account = #{userAccount,jdbcType=VARCHAR},
+      </if>
+      <if test="userPwd != null">
+        user_pwd = #{userPwd,jdbcType=VARCHAR},
+      </if>
+      <if test="userNickname != null">
+        user_nickname = #{userNickname,jdbcType=VARCHAR},
+      </if>
+      <if test="userEmail != null">
+        user_email = #{userEmail,jdbcType=VARCHAR},
+      </if>
+      <if test="delSign != null">
+        del_sign = #{delSign,jdbcType=INTEGER},
+      </if>
+      <if test="createTxStamp != null">
+        create_tx_stamp = #{createTxStamp,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lastupTxStamp != null">
+        lastup_tx_stamp = #{lastupTxStamp,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.example.demo.model.TtaiUser">
+    update ttai_user
+    set user_account = #{userAccount,jdbcType=VARCHAR},
+      user_pwd = #{userPwd,jdbcType=VARCHAR},
+      user_nickname = #{userNickname,jdbcType=VARCHAR},
+      user_email = #{userEmail,jdbcType=VARCHAR},
+      del_sign = #{delSign,jdbcType=INTEGER},
+      create_tx_stamp = #{createTxStamp,jdbcType=TIMESTAMP},
+      lastup_tx_stamp = #{lastupTxStamp,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>
